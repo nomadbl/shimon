@@ -1,0 +1,32 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{Lior Blech}
+\title{Calculations of FR Gravity}
+\begin{document}
+\section{Set up}
+The equation we want to solve is
+\begin{equation}
+\nabla^2\left(\frac{\kappa^2 \rho_b}{\delta R(r,\theta ,\phi)+\kappa^2 \rho (r,\theta ,\phi)}\right)^2=\delta R(r,\theta ,\phi)
+\end{equation}
+in the limit that $\rho_m\rightarrow\infty$, where $\rho_m$ is the scale of the matter density. An example we will work out in detail is 
+\begin{equation}
+\rho(r,\theta,\phi)=\rho_m e^{-\frac{r^2}{\sigma^2}}+\rho_b
+\end{equation}
+We express $\delta R$ as
+\begin{equation}
+\delta R=\frac{\psi_0(r,\theta,\phi)}{\rho_m^2}+\frac{\psi_1(r,\theta,\phi)}{\rho_m^3}+\cdots+\frac{\psi_3(r,\theta,\phi)}{\rho_m^5}+\cdots
+\end{equation}
+The reason for not including terms of lower order is that if introduced they just vanish in the following analysis. We demand the equation to be satisfied at each power of $\rho_m$ and get the equations:
+\begin{subequations}
+\begin{align}
+&\psi_0(r,\theta ,\phi)=\frac{4\rho_b^2 e^{\frac{2 r^2}{\sigma^2}} \left(4 r^2+3\sigma^2\right)}{\sigma^4}\\
+&\psi_1(r,\theta ,\phi)=-\frac{36\rho_b^3 e^{\frac{3r^2}{\sigma^2}} \left(2r^2+\sigma^2\right)}{\sigma^4}\\
+&\psi_2(r,\theta ,\phi)=\frac{24\rho_b^4 e^{\frac{4r^2}{\sigma^2}} \left(8r^2+3\sigma^2\right)}{\sigma^4}
+\end{align}
+\end{subequations}
+etc.
+\end{document}
