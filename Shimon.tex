@@ -7,7 +7,8 @@
 \author{Lior Blech}
 \title{Calculations of FR Gravity}
 \begin{document}
-\section{Set up}
+\chapter{The General Scheme for the analytic calculation-with gaussian cluster}
+\section{Getting $\delta R$}
 The equation we want to solve is
 \begin{equation}
 \nabla^2\left(\frac{\kappa^2 \rho_b}{\delta R(r,\theta ,\phi)+\kappa^2 \rho (r,\theta ,\phi)}\right)^2=\delta R(r,\theta ,\phi)
@@ -18,15 +19,67 @@ in the limit that $\rho_m\rightarrow\infty$, where $\rho_m$ is the scale of the 
 \end{equation}
 We express $\delta R$ as
 \begin{equation}
-\delta R=\frac{\psi_0(r,\theta,\phi)}{\rho_m^2}+\frac{\psi_1(r,\theta,\phi)}{\rho_m^3}+\cdots+\frac{\psi_3(r,\theta,\phi)}{\rho_m^5}+\cdots
+\delta R=\frac{\psi_0(r,\theta,\phi)}{\rho_m^2}+\frac{\psi_1(r,\theta,\phi)}{\rho_m^3}+\frac{\psi_2(r,\theta,\phi)}{\rho_m^5}+\cdots
 \end{equation}
 The reason for not including terms of lower order is that if introduced they just vanish in the following analysis. We demand the equation to be satisfied at each power of $\rho_m$ and get the equations:
 \begin{subequations}
 \begin{align}
-&\psi_0(r,\theta ,\phi)=\frac{4\rho_b^2 e^{\frac{2 r^2}{\sigma^2}} \left(4 r^2+3\sigma^2\right)}{\sigma^4}\\
-&\psi_1(r,\theta ,\phi)=-\frac{36\rho_b^3 e^{\frac{3r^2}{\sigma^2}} \left(2r^2+\sigma^2\right)}{\sigma^4}\\
-&\psi_2(r,\theta ,\phi)=\frac{24\rho_b^4 e^{\frac{4r^2}{\sigma^2}} \left(8r^2+3\sigma^2\right)}{\sigma^4}
+&\psi_0(r,\theta ,\phi)=-\frac{4c_1 \rho_b^2 e^{\frac{2 r^2}{\sigma^2}} \left(4 r^2+3 \sigma ^2\right)}{3c_2^2 \sigma^4}\\
+&\psi_1(r,\theta ,\phi)=\frac{12c_1 \rho_b^3 e^{\frac{3 r^2}{\sigma^2}} \left(2 r^2+\sigma ^2\right)}{c_2^2 \sigma^4}\\
+&\psi_2(r,\theta ,\phi)=-\frac{8 c_1\rho_b^4 e^{\frac{4 r^2}{\sigma^2}} \left(8 r^2+3 \sigma^2\right)}{c_2^2 \sigma^4}
 \end{align}
 \end{subequations}
 etc.
+\section{Getting $\phi$}
+$\phi$ satisfies the laplace equation:
+\begin{equation}
+\nabla^2\phi=\delta R
+\end{equation}
+The solution to which is
+\begin{equation}
+\phi(x)=-\frac{1}{4\pi}\int\frac{\delta R}{|x-x'|}d^3x'
+\end{equation}
+We use the well known relation:
+\begin{equation}
+\frac{1}{|x-x'|}=\sum_{l=0}^\infty \frac{r_{<}^l}{r_{>}^{l+1}}P_l(\cos \gamma)
+\end{equation}
+Where $P_l(x)$ are the Legendre polynomials. $r_<$ and $r_>$ are the respective small and large radii of the vectors $x,x'$.
+We express the overall integral as a sum of two integrals. One over the interior of the ball of radius r and one over the exterior.
+\begin{align}
+\phi(x)=&-\frac{1}{4\pi}\sum_{l=0}^\infty\int_{r'=0}^r \frac{r'^l}{r^{l+1}}P_l(\cos \gamma) \delta R(r')r'^2 dr'd\Omega_\gamma \notag \\
+&-\frac{1}{4\pi}\sum_{l=0}^\infty\int_{r'=r}^\infty \frac{r^l}{r'^{l+1}}P_l(\cos \gamma) \delta R(r')r'^2 dr'd\Omega_\gamma
+\end{align}
+We first perform the integral over the angles. $\delta R$ is angle independent so because of the orthogonality of the Legendre polynomials we get
+\begin{align}
+\phi(x)=&-\frac{1}{r}\int_{r'=0}^r \delta R(r')r'^2 dr' \notag \\
+&-\int_{r'=r}^\infty \delta R(r')r' dr'
+\end{align}
+While this integral diverges, we are only interested in the gradient of the potential.
+\section{Getting $a_5$}
+Taking the divergence we get:
+\begin{equation}
+a_5=\nabla\phi(x)=\frac{1}{r^2}\int_{r'=0}^r \delta R(r')r'^2 dr'
+\end{equation}
+Finally the result is
+\begin{equation}
+a_5=\hat{r}\left(\frac{4c_1 \rho_b^3 R e^{\frac{3 R^2}{\sigma ^2}}}{c_2^2 \rho_m^3 \sigma ^2}-\frac{4 \left(c_1 \rho_b^2 R e^{\frac{2 R^2}{\sigma ^2}}\right)}{3 \rho_m^2 \left(c_2^2 \sigma ^2\right)}+O\left(\frac{1}{\rho_m^4}\right)\right)
+\end{equation}
+\section{some more details of the perturbative calculation}
+The original equation for $R$ was
+\begin{equation}
+\nabla^2\left(\frac{\kappa^2 \rho_b}{R(r,\theta ,\phi)}\right)^2=R(r,\theta ,\phi)-\kappa^2 \rho (r,\theta ,\phi)
+\end{equation}
+We can write down an integral version of this equation:
+\begin{equation}
+\left(\frac{\kappa^2 \rho_b}{R(x)}\right)^2=-\frac{1}{4\pi}\int\frac{R(x')-\kappa^2 \rho (x')}{|x-x'|}d^3x'
+\end{equation}
+To gain some insight we consider the point particle case. In that case we have for $x\neq 0$ where
+\begin{equation}
+\rho(x)=\rho_m\delta(x)+\rho_b
+\end{equation}
+\begin{equation}
+\left(\frac{\kappa^2 \rho_b}{R(x)}\right)^2=-\frac{1}{4\pi}\int\frac{R(x')-\kappa^2\rho_b}{|x-x'|}d^3x'+\frac{1}{4\pi}\frac{\kappa^2 \rho_m}{|x|}
+\end{equation}
+\chapter{}
+
 \end{document}
